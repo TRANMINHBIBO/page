@@ -137,3 +137,43 @@ if (formChangeMulti) {
 }
 
 // end form change multi
+
+// alert
+const showAlert = document.querySelector("[show-alert]");
+
+if(showAlert){
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeAlert = showAlert.querySelector("[close-alert]");
+    setTimeout(() => {
+        showAlert.classList.add("alert-hidden");
+    }, time);
+    closeAlert.addEventListener("click", () => {
+        showAlert.classList.add("alert-hidden");
+    })
+}
+// preview image
+const uploadImage = document.querySelector("[upload-image]");
+if(uploadImage){
+    const uploadImageInput = document.querySelector("[upload-image-input]");
+    const uploadImagePreview = document.querySelector("[upload-image-preview]");
+    uploadImageInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if(file){
+            uploadImagePreview.src = URL.createObjectURL(file);
+        }
+
+    });
+}
+// end preview image
+
+// delete-image-preview
+const buttonDeletePreviewImage = document.querySelector("[button-delete-previewImage]");
+if(buttonDeletePreviewImage){
+    const uploadImageInput = document.querySelector("[upload-image-input]");
+    const uploadImagePreview = document.querySelector("[upload-image-preview]");
+    buttonDeletePreviewImage.addEventListener("click", () => {
+        uploadImageInput.value = "";
+        uploadImagePreview.src = "";
+    }) 
+}
+// end-image-preview

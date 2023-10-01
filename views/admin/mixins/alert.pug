@@ -1,0 +1,32 @@
+mixin alert-success(time)
+  - if (messages.msg)
+    .message.info
+      div(
+        class="alert alert-success"
+        show-alert
+        data-time=time
+      ) #{messages.msg} <span close-alert>x</span>
+mixin alert-error(time)
+  - if (messages.error)
+    .message.info
+      div(
+        class="alert alert-danger"
+        show-alert
+        data-time=time
+      ) #{messages.error} <span close-alert>x</span>
+mixin alert-badWord(time)
+  - if (messages.badWord)
+    .message.info
+      div(
+        class="alert alert-danger"
+        show-alert
+        data-time=time
+      ) #{messages.badWord} <span close-alert>x</span>
+mixin alert-notFound(time)
+  - if (messages.notFound)
+    .message.info
+      div(
+        class="alert alert-danger"
+        show-alert
+        data-time=time
+      ) #{messages.notFound} <span close-alert>x</span>

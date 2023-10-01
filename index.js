@@ -1,6 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const flash = require('express-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+
 require("dotenv").config();
 const Router = require("./routers/client/index.router");
 const routerAdmin = require("./routers/admin/index.router");
@@ -11,6 +16,9 @@ const app = express();
 const port = process.env.PORT;
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser("JHGJKLKLGFLJK"));
+app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(flash());
 Router(app);
 routerAdmin(app);
 database.connect();

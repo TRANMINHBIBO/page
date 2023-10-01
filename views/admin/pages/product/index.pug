@@ -3,7 +3,9 @@ include ../../mixins/search.pug
 include ../../mixins/filterStatus.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
+include ../../mixins/alert.pug
 block main
+  +alert-success(5000)
   h1 danh sach 
       .card.mb-3
         .card-header Bộ lọc và Tìm kiếm
@@ -79,7 +81,10 @@ block main
                       button-change-status
                     ) Dừng hoạt động
                 td
-                  button(class="btn btn-warning btn-sm") Sửa
+                  a(
+                    href = `${prefixAdmin}/products/edit/${item.id}`
+                    class="btn btn-warning btn-sm"
+                    ) Sửa
                   button(class="btn btn-danger btn-sm ml-1") Xóa
   nav
     +pagination(pagination)

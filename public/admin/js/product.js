@@ -17,3 +17,9 @@ if(buttonsChangeStatus.length > 0){
 }
 
 // end-change-status
+
+
+// create product
+
+
+// end create product
