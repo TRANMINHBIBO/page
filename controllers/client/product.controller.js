@@ -14,3 +14,23 @@ module.exports.index = async (req, res) => {
         products: newProducts
     });    
 }
+module.exports.detail = async (req, res) => {
+    console.log(req.params.slug);
+    try{
+        let find = {
+          deleted: false,
+          slug : req.params.slug, 
+          status: "active"
+        }
+        const product = await Product.findOne(find);
+        res.render("client/pages/products/detail.pug", {
+          pageTitle: product.title,
+          product: product
+        });
+        console.log(product);
+      }catch(error){
+        req.flash('notFound', 'Không tìm thấy sản phẩm');
+        res.redirect(`${systemConfig.prefixAdmin}/products`);
+      }
+      
+}

@@ -153,5 +153,22 @@ module.exports.editPatch = async (req, res) => {
     req.flash("error", `Cập nhật thất bại!`);
   }
   
-  res.redirect("back");
+  res.redirect(`${systemConfig.prefixAdmin}/products/detail/${id}`);
 };
+module.exports.detail = async (req, res) => {
+  try{
+    let find = {
+      deleted: false,
+      _id : req.params.id
+    }
+    const product = await Product.findOne(find);
+    res.render("admin/pages/product/detail.pug", {
+      pageTitle: product.title,
+      product: product
+    });
+    console.log(product);
+  }catch(error){
+    req.flash('notFound', 'Không tìm thấy sản phẩm');
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
+  }
+}
