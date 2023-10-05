@@ -4,11 +4,11 @@ const methodOverride = require('method-override');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
+const path = require('path');
 
 require("dotenv").config();
 const Router = require("./routers/client/index.router");
-const routerAdmin = require("./routers/admin/index.router");
+const routerAdmin = require("./routers/admin/index.route");
 const database = require("./config/database");
 const systemConfig = require("./config/system");
 const mongoose = require('mongoose');
@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser("JHGJKLKLGFLJK"));
 app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
+app.use(
+    "/tinymce",
+    express.static(path.join(__dirname, "node_modules", "tinymce"))
+  );
 Router(app);
 routerAdmin(app);
 database.connect();

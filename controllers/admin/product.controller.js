@@ -17,9 +17,17 @@ module.exports.index = async (req, res) => {
   const totalPage = Math.ceil(countProduct / objectPagination.limitItem);
   objectPagination.totalPage = totalPage;
   objectPagination.skip = (objectPagination.currentPage - 1) * (objectPagination.limitItem);
+  let sort = {};
+  if(req.query.sortKey && req.query.sortValue){
+    sort[req.query.sortKey] - req.query.Value;
+  } else{
+    sort.position = "desc";
+  }
+ 
   const product = await Product.find(find).skip(objectPagination.skip).limit(objectPagination.limitItem).sort({
     position: "desc"
   });
+  
   res.render("admin/pages/product/index", {
     pageTitle: "Danh sách sản phẩm",
     products: product,
@@ -107,9 +115,7 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
-  if (req.file) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-  }
+  
   const product = new Product(req.body);
   console.log(req.body);
   console.log(req.file);
